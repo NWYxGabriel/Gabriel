@@ -1,10 +1,10 @@
-# Olá, me chamo Gabriel!
+# Hello, my name is Gabriel!
 
 👤 | 20y, JP - PB
 
-📚 | Eng. Elétrica - IFPB
+📚 | Studying Electrical Engineering - IFPB
 
-⚡ | Téc. Eletrotécnica - IFPB
+⚡ | Electrical Technician - IFPB
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=NWYxGabriel&theme=shadow_red&show_icons=true)
 
