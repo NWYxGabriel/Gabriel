@@ -1,6 +1,6 @@
 # Hello, my name is Gabriel!
 
-👤 | 20y, JP - PB
+👤 | 21y, JP - PB
 
 📚 | Studying Electrical Engineering - IFPB
 
