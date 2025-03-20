@@ -1,6 +1,5 @@
 #include <EEPROM.h>
 
-// Definição das notas musicais usadas
 #define NOTE_D4  294
 #define NOTE_G4  392
 #define NOTE_A4  440
