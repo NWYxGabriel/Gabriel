@@ -5,7 +5,6 @@
 #define NOTE_A4  440
 #define NOTE_A5  880
 
-// Constantes e variáveis globais
 int tons[4] = { NOTE_A5, NOTE_A4, NOTE_G4, NOTE_D4 };
 int sequencia[100] = {};
 int rodada_atual = 0;
@@ -23,7 +22,6 @@ int pinosBotoes[4] = { 10, 11, 12, 13 };
 int botao_pressionado = 0;
 bool perdeu_o_jogo = false;
 
-// Configuração inicial do Arduino
 void setup() {
   Serial.begin(9600);
   for (int i = 0; i <= 3; i++) {
@@ -38,29 +36,23 @@ void setup() {
   Serial.println(vitorias);
 }
 
-// Loop principal do jogo
 void loop() {
   if (perdeu_o_jogo) {
     resetarJogo();
   }
-  
   if (rodada_atual == 0) {
     tocarSomDeInicio();
     delay(500);
   }
-
   proximaRodada();
   reproduzirSequencia();
   aguardarJogador();
-
   if (rodada_atual >= ACERTOS_PARA_VENCER) {
     venceuJogo();
   }
-
   delay(1000);
 }
 
-// Controle do jogo
 void resetarJogo() {
   rodada_atual = 0;
   passo_atual_na_sequencia = 0;
@@ -96,10 +88,15 @@ void aguardarJogador() {
   passo_atual_na_sequencia = 0;
 }
 
-// Interação do jogador
 void aguardarJogada() {
-  boolean jogada_efetuada = false;
+  unsigned long tempo_inicio = millis();
+  bool jogada_efetuada = false;
+  
   while (!jogada_efetuada) {
+    if (millis() - tempo_inicio > 3000) { // Se o jogador demorar mais de 3 segundos
+      perdeuJogo();
+      return;
+    }
     for (int i = 0; i <= 3; i++) {
       if (digitalRead(pinosBotoes[i]) == HIGH) {
         botao_pressionado = i;
@@ -109,6 +106,7 @@ void aguardarJogada() {
         digitalWrite(pinosLeds[i], LOW);
         noTone(pinoAudio);
         jogada_efetuada = true;
+        break;
       }
     }
     delay(10);
@@ -121,7 +119,6 @@ void verificarJogada() {
   }
 }
 
-// Feedback ao jogador
 void perdeuJogo() {
   for (int i = 0; i <= 3; i++) {
     tone(pinoAudio, tons[i]);
@@ -155,7 +152,6 @@ void venceuJogo() {
   resetarJogo();
 }
 
-// Funções auxiliares
 void tocarSomDeInicio() {
   tone(pinoAudio, tons[0]);
   for (int i = 0; i <= 3; i++) {
